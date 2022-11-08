@@ -32,9 +32,9 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             title: 'test html-react-parser',
-            template: path.resolve(__dirname, './src/template.html'),
+            template: path.resolve(__dirname, './public/template.html'),
             filename: 'index.html', // output file
-            favicon: path.resolve(__dirname, './public/favicon.svg')
+            favicon: path.resolve(__dirname, './public/favicon.svg'),
         }),
         new CleanWebpackPlugin(),
     ],
