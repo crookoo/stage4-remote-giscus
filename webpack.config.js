@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { ModuleFederationPlugin } = require('webpack').container;
 
+const deps = require("./package.json").dependencies;
 module.exports = {
     devtool: 'inline-source-map',
     devServer: {
@@ -44,21 +45,21 @@ module.exports = {
         new ModuleFederationPlugin({
             name: 'app2',
             filename: 'remoteEntry.js',
+            remotes: {},
             exposes: {
-                './App': './src/App.tsx',
+                './App': './src/App',
             },
             shared: {
+                ...deps,
                 react: {
-                    singleton: true,
-                    requiredVersion: '^18.2.0',
-                    eager: true,
+                  singleton: true,
+                  requiredVersion: deps.react,
                 },
                 "react-dom": {
-                    singleton: true,
-                    requiredVersion: '^18.2.0',
-                    eager: true,
-                }
-            },
+                  singleton: true,
+                  requiredVersion: deps["react-dom"],
+                },
+              },
         }),
     ],
     output: {
