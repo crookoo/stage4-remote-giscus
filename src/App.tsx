@@ -4,12 +4,16 @@ interface Props {
     postId: string;
 }
 
-export default function App(prop: Props) {
-    console.log(prop.postId);
+export default function App({ postId }: Props) {
+    const theme: string = window.localStorage.getItem('darkmode') === 'true' ? 'dark' : 'light';
+
+    const params = new URLSearchParams(window.location.search);
+    const urlId = params.get('id');
+    const id = postId ? postId : (urlId ? urlId : '0');
 
     return (
         <>
-            <div>{prop.postId}</div>
+            <div>{id}</div>
             <div className="comments-container">
                 <Giscus
                     id="comments"
@@ -18,11 +22,11 @@ export default function App(prop: Props) {
                     category="Announcements"
                     categoryId="DIC_kwDOIncVK84CTEy4"
                     mapping="specific"
-                    term={prop.postId}
+                    term={id}
                     reactionsEnabled="1"
                     emitMetadata="0"
                     inputPosition="top"
-                    theme="light"
+                    theme={theme}
                     lang="de"
                     loading="eager"
                     strict="1"

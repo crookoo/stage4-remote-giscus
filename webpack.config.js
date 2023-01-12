@@ -36,30 +36,29 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'localhost:3002',
+            title: 'stage4: giscusRemote',
             template: path.resolve(__dirname, './public/template.html'),
             filename: 'index.html', // output file
             favicon: path.resolve(__dirname, './public/favicon.svg'),
         }),
         new CleanWebpackPlugin(),
         new ModuleFederationPlugin({
-            name: 'app2',
+            name: 'giscusRemote',
             filename: 'remoteEntry.js',
             remotes: {},
             exposes: {
                 './App': './src/App',
             },
             shared: {
-                ...deps,
                 react: {
-                  singleton: true,
-                  requiredVersion: deps.react,
+                    singleton: true,
+                    requiredVersion: deps.react,
                 },
                 "react-dom": {
-                  singleton: true,
-                  requiredVersion: deps["react-dom"],
+                    singleton: true,
+                    requiredVersion: deps["react-dom"],
                 },
-              },
+            },
         }),
     ],
     output: {
