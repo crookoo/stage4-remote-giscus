@@ -13,7 +13,7 @@ export default function App({ postId }: Props) {
     console.log('remote app:', id);
 
     return (
-        <div className="comments-container">
+        <div className="comments-container" id="comments-wrapper-remote">
             <Giscus
                 id="comments"
                 repo="crookoo/stage4-comments"
